@@ -1,0 +1,34 @@
+﻿<Page x:Class="Datalagring.Pages.Todos"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Datalagring.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Todos">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" TextAlignment="Center" Text="Vänligen skriv in ditt problem" FontSize="22" FontWeight="Medium" Margin="0 0 0 10"/>
+
+        <StackPanel Grid.Row="1" Margin="0 0 10 0">
+            <TextBlock Text="Förnamn" />
+            <TextBox x:Name="tb_FirstName" Padding="5" Margin="0 0 0 10" />
+            <TextBlock Text="Efternamn" />
+            <TextBox x:Name="tb_LastName" Padding="5" Margin="0 0 0 10" />
+            <TextBlock Text="E-mailadress" />
+            <TextBox x:Name="tb_Email" Padding="5" Margin="0 0 0 10" />
+            <TextBlock Text="Titel" />
+            <TextBox x:Name="tb_Title" Padding="5" Margin="0 0 0 10" />
+            <TextBlock Text="Beskriv kort vad problemet är"/>
+            <TextBox x:Name="tb_Text" Padding="5" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="60" Margin="0 0 0 25"/>
+            <Button x:Name="btn_Add" Content="Lägg till" Padding="8" Click="btn_Add_Click" />
+        </StackPanel>
+    </Grid>
+</Page>
