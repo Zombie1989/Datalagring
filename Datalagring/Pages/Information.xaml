@@ -27,6 +27,23 @@
                         <TextBlock Text="{Binding Person.Email}" />
                         <TextBlock Text="{Binding Title}" />
                         <TextBlock Text="{Binding Created}" />
+                        <TextBlock Text="{Binding StatusModes}" FontWeight="Bold">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding StatusModes}" Value="NotStarted">
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding StatusModes}" Value="Ongoing">
+                                            <Setter Property="Foreground" Value="Orange"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding StatusModes}" Value="Completed">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

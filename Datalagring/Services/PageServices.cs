@@ -8,13 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Datalagring.Contexts;
 using System.Windows.Controls;
+using System.Runtime.InteropServices;
+using System.Collections.ObjectModel;
 
 namespace Datalagring.Services
 {
     internal class PageServices
     {
         private static DataContext _context = new DataContext();
+        private ObservableCollection<TaskModel> taskmodels = new ObservableCollection<TaskModel>();
 
+        
 
         public static async Task SaveAsync(TaskModel task)
         {
@@ -39,16 +43,48 @@ namespace Datalagring.Services
                 await _context.SaveChangesAsync();
         }
 
-
-
-
-
-        public static async Task<List<TaskEntity>> GetAsync(string email, string title)
+        public static async Task<IEnumerable<TaskEntity>> GetAsync(string email, string title)
         {
-            var _task = await _context.Tasks.Where(x => x.Title == title && x.Person.Email == email).ToListAsync();
-            var person = _context.Persons.ToList();
+            
+            var _task = await _context.Tasks.Where(x => x.Title == title && x.Person.Email == email).Include(x => x.Person).ToListAsync();
+
+            List<TaskModel> tasks = new List<TaskModel>();
+            foreach (var task in _task) 
+            {
+                TaskModel newTask = new TaskModel
+                {
+                    Title = task.Title,
+                    Text = task.Text,
+                    Email = task.Person.Email,
+                    FirstName = task.Person.FirstName,
+                    LastName = task.Person.LastName,
+                };
+                tasks.Add(newTask);
+            }
 
             return _task;
+        }
+
+
+
+       public static async Task DeleteAsync(Func<TaskEntity, bool> predicate)
+        {
+            var data = await _context.Tasks.FindAsync(predicate);
+            if (data != null)
+            {
+                _context.Remove(data);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public static async Task<TaskEntity> Change(int id, string status)
+        {
+            var task = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+
+            task.StatusModes = status;
+            await _context.SaveChangesAsync();
+
+            return task!;
         }
     }
 }

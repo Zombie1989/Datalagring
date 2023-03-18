@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Datalagring.Models.Entities
@@ -11,20 +12,13 @@ namespace Datalagring.Models.Entities
         [StringLength(255)]
         public string Text { get; set; } = null!;
         public DateTime Created { get; set; } = DateTime.Now;
-        public string StatusName { get; set; } = null!;
-        public Status StatusModes { get; set; } = Status.NotStarted;
+
+
+        public string StatusModes { get; set; } = "NotStarted";
 
 
         //foreign keys
         public Guid PersonId { get; set; }
         public PersonEntity Person { get; set; } = null!;
-
-
-        public enum Status
-        {
-            NotStarted,
-            Ongoing,
-            Completed
-        }
     }
 }

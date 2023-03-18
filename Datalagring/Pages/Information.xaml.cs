@@ -23,7 +23,6 @@ public partial class Information : Page
     public Information()
     {
         InitializeComponent();
-
         var persons = _context.Persons.ToList();
         var tasks = _context.Tasks.ToList();
 

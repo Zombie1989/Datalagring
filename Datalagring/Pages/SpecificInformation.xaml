@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:models="clr-namespace:Datalagring.Models"
       xmlns:local="clr-namespace:Datalagring.Pages"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SpecificInformation">
@@ -38,7 +39,28 @@
                         <TextBlock Text="{Binding Title}" />
                         <TextBlock Text="{Binding Text}" />
                         <TextBlock Text="{Binding Created}" />
+                        <TextBlock Text="{Binding StatusModes}" FontWeight="Bold">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding StatusModes}" Value="NotStarted">
+                                            <Setter Property="Foreground" Value="Red"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding StatusModes}" Value="Ongoing">
+                                            <Setter Property="Foreground" Value="Orange"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding StatusModes}" Value="Completed">
+                                            <Setter Property="Foreground" Value="Green"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                         <Button x:Name="btn_Delete" Content="Delete" Padding="3" Click="btn_Delete_Click" />
+                        <Button x:Name="btn_NotStarted" Content="NotStarted" Margin="2" Click="btn_Change_NotStarted" Tag="{Binding Id}" />
+                        <Button x:Name="btn_OnGoing" Content="OnGoing" Margin="2" Click="btn_Change_OnGoing" Tag="{Binding Id}" />
+                        <Button x:Name="btn_Completed" Content="Completed" Margin="2" Click="btn_Change_Completed" Tag="{Binding Id}" />
+
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
