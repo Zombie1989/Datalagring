@@ -38,11 +38,6 @@ namespace Datalagring.Pages
             lv_Tasks.ItemsSource = task;
         }
 
-        private async void btn_Delete_Click(object sender, RoutedEventArgs e)
-        {
-            //var delete = await PageServices.DeleteAsync();
-        }
-
         private async void btn_Change_NotStarted(object sender, RoutedEventArgs e)
         {
             var myValue = ((Button)sender).Tag;

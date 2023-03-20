@@ -16,7 +16,6 @@ namespace Datalagring.Services
     internal class PageServices
     {
         private static DataContext _context = new DataContext();
-        private ObservableCollection<TaskModel> taskmodels = new ObservableCollection<TaskModel>();
 
         
 
@@ -63,18 +62,6 @@ namespace Datalagring.Services
             }
 
             return _task;
-        }
-
-
-
-       public static async Task DeleteAsync(Func<TaskEntity, bool> predicate)
-        {
-            var data = await _context.Tasks.FindAsync(predicate);
-            if (data != null)
-            {
-                _context.Remove(data);
-                await _context.SaveChangesAsync();
-            }
         }
 
         public static async Task<TaskEntity> Change(int id, string status)

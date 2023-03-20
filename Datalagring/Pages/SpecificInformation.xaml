@@ -56,7 +56,6 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-                        <Button x:Name="btn_Delete" Content="Delete" Padding="3" Click="btn_Delete_Click" />
                         <Button x:Name="btn_NotStarted" Content="NotStarted" Margin="2" Click="btn_Change_NotStarted" Tag="{Binding Id}" />
                         <Button x:Name="btn_OnGoing" Content="OnGoing" Margin="2" Click="btn_Change_OnGoing" Tag="{Binding Id}" />
                         <Button x:Name="btn_Completed" Content="Completed" Margin="2" Click="btn_Change_Completed" Tag="{Binding Id}" />
